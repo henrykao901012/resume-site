@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>金融數據K線圖架構流程圖</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .flow-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.9em;
+        }
+
+        .flow-node {
+            background-color: #fff;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 10px 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            min-width: 200px;
+        }
+
+        .flow-node.primary {
+            background-color: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+
+        .flow-node.cache {
+            background-color: #e3f2fd;
+            border-color: #2196f3;
+        }
+
+        .flow-node.backend {
+            background-color: #fce4ec;
+            border-color: #e91e63;
+        }
+
+        .flow-arrow {
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 12px solid #667eea;
+            margin: -5px 0;
+        }
+
+        .flow-branch {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            position: relative;
+        }
+
+        .branch-line {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 15px;
+            border: 2px solid #667eea;
+            border-bottom: none;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .flow-label {
+            font-size: 0.8em;
+            color: #666;
+            font-style: italic;
+            margin: 0 10px;
+        }
+
+        .cache-levels {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .cache-item {
+            background-color: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 6px;
+            padding: 5px 10px;
+            font-size: 0.85em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flow-diagram">
+        <div class="flow-node primary">用戶操作 (縮放/平移)</div>
+        <div class="flow-arrow"></div>
+
+        <div class="flow-node">前端節流控制<br><span class="flow-label">限制更新頻率 (30fps)</span></div>
+        <div class="flow-arrow"></div>
+
+        <div class="flow-node">二分查找<br><span class="flow-label">O(log n) 快速定位</span></div>
+        <div class="flow-arrow"></div>
+
+        <div class="flow-node cache">檢查本地快取</div>
+        <div class="flow-node backend" style="padding: 15px;">
+            <div style="margin-bottom: 12px; font-weight: 600;">分層快取檢查</div>
+            <div style="display: flex; flex-direction: column; gap: 8px; align-items: stretch;">
+                <div
+                    style="background-color: #d4edda; border: 2px solid #28a745; border-radius: 6px; padding: 8px 15px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: 600; color: #155724;">Layer 1</span>
+                    <span style="color: #155724;">已顯示</span>
+                </div>
+                <div
+                    style="background-color: #cce5ff; border: 2px solid #004085; border-radius: 6px; padding: 8px 15px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: 600; color: #004085;">Layer 2</span>
+                    <span style="color: #004085;">已渲染未顯示</span>
+                </div>
+                <div
+                    style="background-color: #fff3cd; border: 2px solid #856404; border-radius: 6px; padding: 8px 15px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: 600; color: #856404;">Layer 3</span>
+                    <span style="color: #856404;">已快取未渲染</span>
+                </div>
+                <div
+                    style="background-color: #f8d7da; border: 2px solid #721c24; border-radius: 6px; padding: 8px 15px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: 600; color: #721c24;">Layer 4</span>
+                    <span style="color: #721c24;">未快取</span>
+                </div>
+            </div>
+        </div>
+        <div class="flow-arrow"></div>
+
+        <div class="flow-branch">
+            <div class="branch-line"></div>
+            <div style="text-align: center;">
+                <div style="color: #28a745; font-weight: 600; margin-bottom: 10px;">✓ 命中</div>
+                <div class="flow-node">LTTB 智能採樣</div>
+                <div class="flow-node">虛擬滾動渲染</div>
+            </div>
+            <div style="text-align: center;">
+                <div style="color: #dc3545; font-weight: 600; margin-bottom: 10px;">✗ 未命中</div>
+                <div class="flow-node">智能請求合併</div>
+                <div class="flow-node backend">HTTP/2 請求</div>
+                <div class="flow-node backend">API 閘道</div>
+                <div class="flow-node backend">聚合引擎</div>
+                <div class="flow-node">流式傳輸</div>
+            </div>
+        </div>
+
+        <div class="flow-arrow"></div>
+        <div class="flow-node">前端接收處理</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node cache">更新本地快取</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node primary">渲染更新</div>
+    </div>
+</body>
+
+</html>

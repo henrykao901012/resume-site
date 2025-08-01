@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radix Sort 演算法架構圖</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .radix-flow-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.9em;
+            position: relative;
+        }
+
+        .radix-node {
+            background-color: #fff;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 10px 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            min-width: 250px;
+        }
+
+        .radix-node.primary {
+            background-color: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+
+        .radix-node.conversion {
+            background-color: #e8f5e9;
+            border-color: #4caf50;
+        }
+
+        .radix-node.sort {
+            background-color: #fff3e0;
+            border-color: #ff9800;
+        }
+
+        .radix-node.optimization {
+            background-color: #e3f2fd;
+            border-color: #2196f3;
+        }
+
+        .radix-arrow {
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 12px solid #667eea;
+            margin: -5px 0;
+        }
+
+        .radix-branch {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            position: relative;
+        }
+
+        .radix-label {
+            font-size: 0.8em;
+            color: #666;
+            font-style: italic;
+            margin: 0 10px;
+        }
+
+        .code-snippet {
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 8px;
+            font-family: monospace;
+            font-size: 0.85em;
+            margin: 5px 0;
+            text-align: left;
+        }
+
+        .bucket-visualization {
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+            margin: 10px 0;
+        }
+
+        .bucket-item {
+            width: 30px;
+            height: 40px;
+            border: 1px solid #999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+            background-color: #f0f0f0;
+        }
+
+        .bucket-item.filled {
+            background-color: #bbdefb;
+            border-color: #1976d2;
+        }
+
+        /* 遞迴箭頭樣式 */
+        .recursive-arrow {
+            position: absolute;
+            right: -80px;
+            top: 50%;
+            width: 60px;
+            height: 300px;
+            transform: translateY(-50%);
+        }
+
+        .recursive-arrow svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .recursive-arrow path {
+            fill: none;
+            stroke: #9c27b0;
+            stroke-width: 2;
+            marker-end: url(#arrowhead);
+        }
+
+        .recursive-label {
+            position: absolute;
+            right: -120px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+            color: #9c27b0;
+            font-weight: 600;
+            font-size: 0.9em;
+            white-space: nowrap;
+        }
+
+        .optimization-section {
+            margin-top: 20px;
+            background-color: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .optimization-section h4 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        .optimization-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .optimization-item {
+            background-color: white;
+            padding: 10px;
+            border-radius: 6px;
+            border-left: 3px solid #4caf50;
+        }
+
+        .optimization-item:nth-child(2) {
+            border-left-color: #2196f3;
+        }
+
+        .optimization-item:nth-child(3) {
+            border-left-color: #ff9800;
+        }
+
+        .optimization-item:nth-child(4) {
+            border-left-color: #9c27b0;
+        }
+
+        .optimization-item strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .optimization-item span {
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .radix-node {
+                min-width: 180px;
+                padding: 8px 15px;
+                font-size: 0.85em;
+            }
+
+            .radix-branch {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .recursive-arrow,
+            .recursive-label {
+                display: none;
+            }
+
+            .optimization-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- SVG 箭頭定義 -->
+    <svg style="position: absolute; width: 0; height: 0;">
+        <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                <polygon points="0 0, 10 3.5, 0 7" fill="#9c27b0" />
+            </marker>
+        </defs>
+    </svg>
+
+    <div class="radix-flow-diagram">
+        <div class="radix-node primary">輸入浮點數陣列<br><span class="radix-label">double[] array</span></div>
+        <div class="radix-arrow"></div>
+
+        <div class="radix-node">大小判斷<br><span class="radix-label">size ≤ 32 ?</span></div>
+        <div class="radix-arrow"></div>
+
+        <div class="radix-branch">
+            <div style="text-align: center;">
+                <div style="color: #ff9800; font-weight: 600; margin-bottom: 10px;">小陣列路徑</div>
+                <div class="radix-node sort">Insertion Sort<br><span class="radix-label">O(n²) 但快取友好</span></div>
+            </div>
+            <div style="text-align: center; position: relative;">
+                <div style="color: #2196f3; font-weight: 600; margin-bottom: 10px;">大陣列路徑</div>
+                <div class="radix-node conversion">
+                    IEEE 754 轉換<br>
+                    <div class="code-snippet">bits >> 63 ? ~bits : bits ^ (1ULL << 63)</div>
+                            <span class="radix-label">處理正負數排序</span>
+                    </div>
+                    <div class="radix-arrow"></div>
+
+                    <div class="radix-node optimization">
+                        MSD Radix Sort<br>
+                        <span class="radix-label">從最高有效位元開始</span>
+                        <div class="bucket-visualization">
+                            <div class="bucket-item">0</div>
+                            <div class="bucket-item">1</div>
+                            <div class="bucket-item filled">...</div>
+                            <div class="bucket-item filled">254</div>
+                            <div class="bucket-item">255</div>
+                        </div>
+                        <span class="radix-label">256 個桶 (8-bit)</span>
+                    </div>
+                    <div class="radix-arrow"></div>
+
+                    <div class="radix-node">
+                        計數與分配<br>
+                        <span class="radix-label">統計各桶元素數量</span>
+                    </div>
+                    <div class="radix-arrow"></div>
+
+                    <div class="radix-node optimization">
+                        記憶體優化<br>
+                        <span class="radix-label">使用暫存陣列避免額外分配</span>
+                    </div>
+                    <div class="radix-arrow"></div>
+
+                    <div class="radix-node" style="position: relative;">
+                        遞迴處理<br>
+                        <span class="radix-label">對各桶進行下一位元排序<br>byte 7 → 6 → ... → 0</span>
+
+                        <!-- 遞迴箭頭 -->
+                        <div class="recursive-arrow">
+                            <svg viewBox="0 0 60 300">
+                                <path d="M 10 250 Q 50 250, 50 150 Q 50 50, 50 30" />
+                            </svg>
+                            <div class="recursive-label">遞迴呼叫</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="radix-arrow"></div>
+            <div class="radix-node primary">排序完成<br><span class="radix-label">原地排序結果</span></div>
+        </div>
+
+        <div class="optimization-section">
+            <h4>關鍵優化技術</h4>
+            <div class="optimization-grid">
+                <div class="optimization-item">
+                    <strong>混合排序策略</strong>
+                    <span>小陣列使用 Insertion Sort<br>減少遞迴開銷</span>
+                </div>
+                <div class="optimization-item">
+                    <strong>位元操作技巧</strong>
+                    <span>巧妙處理浮點數符號位<br>確保正確排序順序</span>
+                </div>
+                <div class="optimization-item">
+                    <strong>記憶體管理</strong>
+                    <span>預分配暫存空間<br>避免動態記憶體分配</span>
+                </div>
+                <div class="optimization-item">
+                    <strong>遞迴深度控制</strong>
+                    <span>每層處理一個位元組<br>最多 8 層遞迴</span>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

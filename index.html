@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高維謙 - AI工程師履歷</title>
+    <style>
+        /* 個人照片樣式 */
+        .profile-photo-container {
+            margin-bottom: 20px;
+        }
+
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            object-fit: cover;
+        }
+
+        /* 響應式設計 - 手機版調整 */
+        @media (max-width: 600px) {
+            .profile-photo {
+                width: 120px;
+                height: 120px;
+            }
+        }
+
+        /* 列印時的調整 */
+        @media print {
+            .profile-photo {
+                width: 100px;
+                height: 100px;
+                border-width: 2px;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+            font-size: 0.95em;
+        }
+
+        .contact-info span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        main {
+            padding: 40px;
+        }
+
+        section {
+            margin-bottom: 35px;
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #667eea;
+            position: relative;
+        }
+
+        h3 {
+            color: #444;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            margin-top: 20px;
+        }
+
+        .objective {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            font-style: italic;
+            color: #555;
+            border-left: 4px solid #667eea;
+        }
+
+        .education-item,
+        .project-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #fafafa;
+            border-radius: 8px;
+            border-left: 3px solid #764ba2;
+        }
+
+        .project-item {
+            background-color: #f0f4ff;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        /* 為特別長的專案項目提供條件分頁 */
+        .project-item.allow-break {
+            page-break-inside: auto;
+            break-inside: auto;
+        }
+
+        .date {
+            color: #666;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .highlight {
+            background-color: #fff3cd;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .skill-category {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+        }
+
+        .skill-category h4 {
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background-color: #e9ecef;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            color: #495057;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .performance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 0.9em;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        .performance-table th {
+            background-color: #667eea;
+            color: white;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .performance-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .performance-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .achievement {
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+
+        .links {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .link-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9em;
+            transition: background-color 0.3s;
+        }
+
+        .link-btn:hover {
+            background-color: #764ba2;
+        }
+
+        /* 技術架構圖樣式 */
+        .tech-diagram {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.85em;
+            overflow-x: auto;
+            margin: 15px 0;
+            border: 1px solid #e9ecef;
+        }
+
+        /* 成績單截圖樣式 */
+        .transcript-section {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 2px solid #e9ecef;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .transcript-title {
+            color: #495057;
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .transcript-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .transcript-table th {
+            background-color: #4a90e2;
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .transcript-table td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 0.9em;
+        }
+
+        .transcript-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .transcript-table tr:hover {
+            background-color: #f5f7fa;
+        }
+
+        .course-name {
+            font-weight: 600;
+            color: #2c3e50;
+            text-align: left;
+            padding-left: 20px;
+        }
+
+        .score {
+            font-weight: 700;
+            color: #27ae60;
+            font-size: 1.1em;
+        }
+
+        .transcript-watermark {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.85em;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* 新增：技術特色標籤 */
+        .feature-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 10px 0;
+        }
+
+        .feature-tag {
+            background-color: #e3f2fd;
+            color: #1976d2;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        /* 可收合內容的樣式 */
+        .collapsible-container {
+            margin: 15px 0;
+        }
+
+        .collapsible-toggle {
+            background-color: #f0f4ff;
+            border: 1px solid #667eea;
+            border-radius: 8px;
+            padding: 10px 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .collapsible-toggle:hover {
+            background-color: #e8ecff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .collapsible-toggle-icon {
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            opacity: 0;
+        }
+
+        .collapsible-content.active {
+            max-height: 2000px;
+            /* 設定足夠大的值 */
+            opacity: 1;
+            transition: max-height 0.5s ease-in, opacity 0.3s ease-in;
+        }
+
+        @media print {
+            body {
+                background-color: white;
+            }
+
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+
+            /* 防止元素被分頁截斷 */
+            section,
+            .project-item,
+            .education-item,
+            .skill-category,
+            .performance-table {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            /* 確保標題不會單獨留在頁底 */
+            h2,
+            h3 {
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+
+            /* 在主要區塊之前可以分頁 */
+            section {
+                page-break-before: auto;
+                break-before: auto;
+            }
+
+            /* 避免表格被截斷 */
+            table,
+            tr,
+            td,
+            th {
+                page-break-inside: avoid;
+            }
+
+            /* 調整邊距以適應 A4 紙張 */
+            @page {
+                margin: 2cm;
+                size: A4;
+            }
+
+            /* 減少內邊距以節省空間 */
+            main {
+                padding: 20px;
+            }
+
+            .project-item,
+            .education-item {
+                padding: 12px;
+                margin-bottom: 15px;
+            }
+
+            /* 打印時確保內容展開 */
+            .collapsible-content {
+                max-height: none !important;
+                opacity: 1 !important;
+            }
+
+            .collapsible-toggle {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            main {
+                padding: 20px;
+            }
+        }
+
+        .link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9em;
+            transition: background-color 0.3s;
+        }
+
+        .link-btn:hover {
+            background-color: #764ba2;
+        }
+
+        .link-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        /* 聯絡資訊連結樣式 */
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .contact-link:hover {
+            opacity: 0.8;
+        }
+
+        .contact-icon {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+    </style>
+</head>
+
+
+
+<body>
+
+    <!-- SVG 圖標定義區（隱藏） -->
+    <svg style="display: none;">
+
+        <!-- GitHub -->
+        <defs>
+            <symbol id="github-icon" viewBox="0 0 16 16">
+                <path
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+            </symbol>
+        </defs>
+
+        <!-- YouTube -->
+        <symbol id="youtube-icon" viewBox="0 0 16 16">
+            <path
+                d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z" />
+        </symbol>
+    </svg>
+
+    <div class="container">
+        <header>
+
+            <div class="profile-photo-container">
+                <img src="image/face.jpg" alt="高維謙" class="profile-photo">
+            </div>
+            <h1>高維謙</h1>
+            <div class="contact-info">
+                <span>📞 0979862156</span>
+                <span>✉️ henrykao901012@gmail.com</span>
+                <a href="https://github.com/henrykao901012" class="contact-link" target="_blank">
+                    <svg class="contact-icon" viewBox="0 0 16 16">
+                        <use href="#github-icon"></use>
+                    </svg>
+                    GitHub
+                </a>
+            </div>
+        </header>
+
+        <main>
+            <section>
+                <div class="objective">
+                    <strong>求職目標：</strong>申請人工智慧學院工程師職位，期望發揮我在高效能演算法開發、影像處理、數據視覺化與前端效能優化的能力，貢獻於 AI 領域的研究與應用。
+                </div>
+            </section>
+
+            <section>
+                <h2>📝 個人簡歷</h2>
+                <div style="background-color: #f8f9fa; padding: 25px; border-radius: 8px; line-height: 1.8;">
+                    <p style="margin-bottom: 15px;">
+                        從高中第一次接觸程式設計開始，我就深深被電腦運算的邏輯之美所吸引。進入資工系後，我特別著迷於影像處理與數據視覺化領域，因為它們完美結合了數學理論與實際應用。每當看到一張模糊的影像經過演算法處理後變得清晰，或是將複雜的金融數據轉化為直觀的視覺圖表時，那種成就感是無可比擬的。
+                    </p>
+
+                    <p style="margin-bottom: 15px;">
+                        在大學四年的學習中，我不僅在演算法課程取得優異成績，更重要的是培養了解決問題的思維模式。我的專長聚焦在影像處理、圖論演算法與高效能前端開發的結合應用。這在畢業專題「不規則影像拼接系統」中得到充分展現，透過
+                        SURF 特徵點匹配與圖論中的最大生成樹MST演算法，成功解決了傳統工具無法處理的不規則拼接問題，榮獲校內競賽佳作殊榮。
+                    </p>
+
+                    <p style="margin-bottom: 15px;">
+                        除了後端演算法能力，我在前端效能優化方面也有深入研究。近期開發的「金融數據K線圖視覺化系統」
+                        展示了我在處理大規模時間序列數據的能力，實現了可處理三百萬數據點的流暢視覺化體驗。
+                    </p>
+
+                    <p style="margin-bottom: 15px;">
+                        在技術能力外，我也重視團隊合作與溝通。在專題開發過程中，我擔任主要程式設計與演算法開發角色，與組員保持良好的協作關係。多次參與校內簡報與專題成果展示的經驗，讓我學會如何將複雜的技術概念轉化為淺顯易懂的語言。
+                    </p>
+
+                    <p>
+                        展望未來，我期望能在人工智慧學院繼續深耕各項與 AI 技術的整合應用，將所學貢獻於實際的產業需求，並持續精進自己在這個快速發展領域的專業能力。
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>🎓 學歷</h2>
+                <div class="education-item">
+                    <h3>國立海洋大學 — 資訊工程學系</h3>
+                    <p class="date">2020 年 9 月 - 2024 年 6 月</p>
+                    <ul>
+                        <li>主修：演算法設計、人工智慧、影像處理、機器學習</li>
+                        <li class="highlight">畢業專題獲選「佳作」殊榮</li>
+                    </ul>
+
+                    <!-- 成績單截圖部分 -->
+                    <div class="transcript-section">
+                        <div class="transcript-title">📊 核心專業課程成績</div>
+                        <table class="transcript-table">
+                            <thead>
+                                <tr>
+                                    <th>課程名稱</th>
+                                    <th>學年期</th>
+                                    <th>學分</th>
+                                    <th>成績</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="course-name">演算法</td>
+                                    <td>111-2</td>
+                                    <td>3</td>
+                                    <td class="score">A+</td>
+                                </tr>
+                                <tr>
+                                    <td class="course-name">資料結構</td>
+                                    <td>111-1</td>
+                                    <td>3</td>
+                                    <td class="score">A</td>
+                                </tr>
+                                <tr>
+                                    <td class="course-name">Python程式語言</td>
+                                    <td>110-2</td>
+                                    <td>3</td>
+                                    <td class="score">A</td>
+                                </tr>
+                                <tr>
+                                    <td class="course-name">人工智慧</td>
+                                    <td>112-1</td>
+                                    <td>3</td>
+                                    <td class="score">A-</td>
+                                </tr>
+                                <tr>
+                                    <td class="course-name">資料庫系統</td>
+                                    <td>111-2</td>
+                                    <td>3</td>
+                                    <td class="score">A-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="transcript-watermark">
+                            ※ 以上為國立臺灣海洋大學官方成績單節錄
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>💡 專案經歷</h2>
+
+                <div class="project-item">
+                    <h3>不規則影像拼接系統開發</h3>
+                    <p class="date">專題佳作獲獎 | 與兩位組員共同完成 | 指導教授：蔡宇軒</p>
+
+                    <div class="achievement">
+                        🏆 榮獲校內專題競賽「佳作」殊榮
+                    </div>
+
+                    <p><strong>研究動機：</strong><br>
+                        現有影像拼接工具多仰賴固定形狀或順序，對於不規則影像的處理效果不佳。專題旨在開發一套可處理不規則形狀拼接的演算法，提升使用彈性與品質。</p>
+
+                    <p><strong>技術核心：</strong></p>
+                    <ul>
+                        <li>使用 Python + OpenCV + NetworkX 開發拼接系統</li>
+                        <li>SURF (Speeded-Up Robust Features) 特徵點抽取與匹配，高效處理拼接影像</li>
+                        <li>建立 weighted graph 並應用 Maximum Spanning Tree (MST) 找出最佳拼接順序</li>
+                        <li>結合圖論與特徵相似度分析，完成多張圖片自動拼接</li>
+                    </ul>
+
+                    <p><strong>技術實作流程：</strong></p>
+                    <ol>
+                        <li><strong>Graph Construction：</strong>使用 networkx 創建圖論模型，每個節點代表一張影像，利用 SURF
+                            特徵匹配計算節點間的相似度權重</li>
+                        <li><strong>Maximum Spanning Tree Computation：</strong>使用 MST 概念識別最相關和重疊的連接，確保影像重建的最佳順序</li>
+                    </ol>
+
+                    <p><strong>成果特色：</strong></p>
+                    <ul>
+                        <li>可處理多種影像場景：同地不同時間、多人合照等不規則拼接需求</li>
+                        <li>運用 PicoCollage、Photo & Video Collage Maker 等工具驗證，本系統顯著減少影像扭曲</li>
+                        <li>成功處理不同場景（合併、合照、同地點不同時間）的拼接任務</li>
+                    </ul>
+
+                    <div id="project-poster">
+                        <div class="poster-preview">
+                            <img src="image/poster-thumbnail.jpg" alt="專題海報縮圖"
+                                style="width: 100%; max-width: 600px; margin: 20px auto; display: block; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                            <p style="text-align: center; color: #666; font-size: 0.9em; margin-top: 10px;">專題海報展示</p>
+                        </div>
+                    </div>
+
+                    <div class="links" style="margin-top: 15px;">
+
+                        <a href="https://www.youtube.com/watch?v=G-efSKlXlMI" class="link-btn" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg">
+                                <use href="#youtube-icon"></use>
+                            </svg>
+                            展示影片
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div class="project-item">
+                    <h3>金融數據K線圖視覺化系統</h3>
+                    <p class="date">獨立開發 | 2024</p>
+
+                    <div class="achievement">
+                        🏆 實現百萬級數據點的流暢視覺化，支援年度到分鐘級別無縫縮放
+                    </div>
+
+                    <div class="feature-tags">
+                        <span class="feature-tag">高效能</span>
+                        <span class="feature-tag">大數據處理</span>
+                        <span class="feature-tag">響應式設計</span>
+                        <span class="feature-tag">效能優化</span>
+                    </div>
+
+                    <p><strong>專案動機：</strong><br>
+                        起於對量化交易的興趣，需要一套自己的看盤系統，現有金融圖表工具在處理大量歷史數據時常有效能瓶頸，無法提供流暢的互動體驗，
+                        如TradimgView 且需要會員。本專案旨在開發一套高效能的K線圖視覺化系統，解決大數據量下的渲染效能問題。</p>
+
+                    <p><strong>核心技術實作：</strong></p>
+                    <ul>
+                        <li><strong>效能優化：</strong>實作二分查找快速定位資料，節流控制確保 30fps 流暢體驗</li>
+                        <li><strong>智能採樣：</strong>實作 LTTB (Largest Triangle Three Buckets) 演算法，保留視覺重要特徵同時減少渲染點數</li>
+                        <li><strong>動態顯示模式：</strong>根據數據密度自動切換 K線圖/線圖模式，確保任何縮放級別都能清晰呈現</li>
+                        <li><strong>自適應軸標：</strong>時間軸根據跨度自動調整格式（年/月/日/時/分），價格軸動態適應可見範圍</li>
+                    </ul>
+
+                    <p><strong>技術架構：</strong></p>
+                    <div id="tech-architecture">
+                        <iframe src="flow/finance-architecture.html" width="100%" height="1100px" frameborder="0"
+                            scrolling="no"
+                            style="border: none; border-radius: 8px; background-color: #f8f9fa; display: block;">
+                        </iframe>
+                    </div>
+
+                    <div id="demo-video">
+                        <div style="margin: 15px 0;">
+                            <video width="100%" controls muted loop
+                                style="max-width: 700px; display: block; margin: 0 auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                                <source src="video/kline_plot_demo.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+
+                    <p><strong>關鍵成果：</strong></p>
+                    <ul>
+                        <li>處理百萬級數據點仍保持流暢的 30fps 互動體驗</li>
+                        <li>支援從年度視圖到分鐘級別的 10,000x 縮放範圍</li>
+                        <li>使用模組化架構，包含 DataManager、PerformanceOptimizer、DisplayModeManager 等類別</li>
+                    </ul>
+
+
+                    <div class="links" style="margin-top: 15px;">
+                        <a href="https://github.com/henrykao901012/BackTesterSite" target="_blank" class="link-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg">
+                                <use href="#github-icon"></use>
+                            </svg>
+                            GitHub
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="project-item">
+                    <h3>高效能浮點數 Radix Sort 演算法實作與優化</h3>
+                    <p class="date">獨立開發 | 2024</p>
+
+                    <div class="achievement">
+                        🏆 實現多種 Radix Sort 變體，最佳版本效能超越 std::sort 達 5.5 倍
+                    </div>
+
+                    <p><strong>專案動機：</strong><br>
+                        研究如何將傳統用於整數排序的 Radix Sort 演算法擴展至浮點數排序，並透過多種優化策略提升效能，挑戰 C++ STL 的標準排序演算法。</p>
+
+                    <p><strong>技術實作：</strong></p>
+                    <ul>
+                        <li>開發 6 種不同的 Radix Sort 變體，包含 LSD、MSD 及多執行緒版本</li>
+                        <li>實作 IEEE 754 浮點數轉換技術，巧妙處理正負數排序問題</li>
+                        <li>採用混合排序策略：小資料集使用 Insertion Sort，大資料集使用 Radix Sort</li>
+                        <li>實作多執行緒並行化，有效利用多核心處理器</li>
+                    </ul>
+
+                    <p><strong>效能成果（1 億筆雙精度浮點數）：</strong></p>
+                    <table class="performance-table">
+                        <tr>
+                            <th>演算法版本</th>
+                            <th>執行時間（秒）</th>
+                            <th>相對於 std::sort</th>
+                        </tr>
+                        <tr>
+                            <td>MSD Radix Sort (多執行緒)</td>
+                            <td>8.79</td>
+                            <td style="color: #28a745; font-weight: bold;">5.32x 更快</td>
+                        </tr>
+                        <tr>
+                            <td>MSD Radix Sort (遞迴)</td>
+                            <td>9.85</td>
+                            <td style="color: #28a745;">4.75x 更快</td>
+                        </tr>
+                        <tr>
+                            <td>Radix Sort (16-bit buckets)</td>
+                            <td>17.96</td>
+                            <td style="color: #28a745;">2.60x 更快</td>
+                        </tr>
+                        <tr>
+                            <td>std::sort (基準)</td>
+                            <td>46.71</td>
+                            <td>1.00x</td>
+                        </tr>
+                    </table>
+
+                    <p><strong>技術亮點：</strong></p>
+                    <ul>
+                        <li>創新的浮點數位元操作技術，實現高效的基數排序</li>
+                        <li>記憶體存取模式優化，提升 CPU 快取命中率</li>
+                        <li>實作完整的正確性驗證，確保與標準排序結果一致</li>
+                    </ul>
+
+                    <p><strong>技術架構：</strong></p>
+                    <div id="radix-sort-architecture">
+                        <iframe id="radix-sort-iframe" src="flow/radix-sort-flow.html" width="100%" height="1100"
+                            frameborder="0" scrolling="no"
+                            style="border: none; border-radius: 8px; background-color: #f8f9fa; display: block;">
+                        </iframe>
+                    </div>
+
+                    <div class="links" style="margin-top: 15px;">
+                        <a href="https://github.com/henrykao901012/floating-points-sort" class="link-btn"
+                            target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg">
+                                <use href="#github-icon"></use>
+                            </svg>
+                            GitHub
+                        </a>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section>
+                <h2>🛠️ 技能專長</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h4>程式語言</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">C/C++</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">Verilog</span>
+                        </div>
+                    </div>
+
+
+                    <div class="skill-category">
+                        <h4>前端與視覺化</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">HTML</span>
+                            <span class="skill-tag">CSS</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">D3.js</span>
+                            <span class="skill-tag">Django</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h4>AI & 影像處理</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">OpenCV</span>
+                            <span class="skill-tag">scikit-image</span>
+                            <span class="skill-tag">SURF</span>
+                            <span class="skill-tag">PyTorch (基礎)</span>
+                        </div>
+                    </div>
+
+
+                </div>
+            </section>
+
+            <section>
+                <h2>🤝 團隊與溝通經驗</h2>
+                <ul>
+                    <li>於專題中擔任主要程式設計與演算法開發角色，與組員協作分工順暢</li>
+                    <li>多次校內簡報與專題成果展示，能清楚傳達技術概念與應用價值</li>
+                    <li>具備撰寫技術文件與程式碼註解的良好習慣，重視程式碼可讀性與維護性</li>
+                    <li>開發模組化、物件導向的程式架構，便於團隊協作與後續維護</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // 初始化所有可收合的區塊
+        document.addEventListener('DOMContentLoaded', function () {
+            // 創建收合功能
+            function createCollapsible(containerId, toggleText, defaultOpen = false) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+
+                // 創建包裝容器
+                const wrapper = document.createElement('div');
+                wrapper.className = 'collapsible-container';
+
+                // 創建切換按鈕
+                const toggle = document.createElement('div');
+                toggle.className = 'collapsible-toggle';
+                toggle.innerHTML = `
+                    <span>${toggleText}</span>
+                    <span class="collapsible-toggle-icon">${defaultOpen ? '▼' : '▶'}</span>
+                `;
+
+                // 創建內容容器
+                const content = document.createElement('div');
+                content.className = 'collapsible-content' + (defaultOpen ? ' active' : '');
+
+                // 將原內容移到新容器中
+                while (container.firstChild) {
+                    content.appendChild(container.firstChild);
+                }
+
+                // 組裝結構
+                wrapper.appendChild(toggle);
+                wrapper.appendChild(content);
+                container.appendChild(wrapper);
+
+                // 添加點擊事件
+                toggle.addEventListener('click', function () {
+                    const isActive = content.classList.contains('active');
+                    content.classList.toggle('active');
+                    toggle.querySelector('.collapsible-toggle-icon').textContent = isActive ? '▶' : '▼';
+                });
+            }
+
+            // 技術架構圖
+            createCollapsible('tech-architecture', '📊 查看技術架構圖', false);
+
+            // 圖表專案demo影片
+            createCollapsible('demo-video', '🎬 查看展示影片', false);
+
+            // 專題海報
+            createCollapsible('project-poster', '🖼️ 查看專題海報', false);
+
+            // Radix Sort 架構圖
+            createCollapsible('radix-sort-architecture', '📊 查看演算法架構圖', false);
+
+        });
+
+    </script>
+
+</body>
+
+</html>
