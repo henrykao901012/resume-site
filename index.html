@@ -394,47 +394,7 @@
             font-weight: 600;
         }
 
-        /* 可收合內容的樣式 */
-        .collapsible-container {
-            margin: 15px 0;
-        }
 
-        .collapsible-toggle {
-            background-color: #f0f4ff;
-            border: 1px solid #667eea;
-            border-radius: 8px;
-            padding: 10px 15px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s ease;
-            user-select: none;
-        }
-
-        .collapsible-toggle:hover {
-            background-color: #e8ecff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .collapsible-toggle-icon {
-            font-size: 1.2em;
-            transition: transform 0.3s ease;
-        }
-
-        .collapsible-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            opacity: 0;
-        }
-
-        .collapsible-content.active {
-            max-height: 2000px;
-            /* 設定足夠大的值 */
-            opacity: 1;
-            transition: max-height 0.5s ease-in, opacity 0.3s ease-in;
-        }
 
         @media print {
             body {
@@ -567,16 +527,6 @@
             margin-bottom: 20px;
         }
 
-        .project-wrapper .collapsible-toggle {
-            background-color: #f0f4ff;
-            border: 2px solid #764ba2;
-            font-weight: 600;
-        }
-
-        .project-wrapper .collapsible-toggle:hover {
-            background-color: #e8ecff;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
-        }
 
         /* 圖片與文字間距 */
         .title-wrapper {
@@ -592,6 +542,141 @@
             /* 減少行高，避免字體「浮起來」 */
             font-size: 1.5em;
             /* 標題大小自己調整 */
+        }
+
+        /* 原有的收合容器樣式 */
+        .collapsible-container {
+            margin: 15px 0;
+        }
+
+        /* 頂部和底部按鈕的共同樣式 */
+        .collapsible-toggle {
+            background-color: #f0f4ff;
+            border: 1px solid #667eea;
+            border-radius: 8px;
+            padding: 10px 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .collapsible-toggle:hover {
+            background-color: #e8ecff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 底部按鈕的特殊樣式 */
+        .collapsible-toggle-bottom {
+            margin-top: 20px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            justify-content: center;
+        }
+
+        .collapsible-toggle-bottom:hover {
+            background-color: #e9ecef;
+            border-color: #adb5bd;
+        }
+
+        /* 圖標樣式 */
+        .collapsible-toggle-icon {
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+
+        /* 內容容器樣式 */
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            opacity: 0;
+        }
+
+        .collapsible-content.active {
+            max-height: none;
+            opacity: 1;
+            transition: max-height 0.5s ease-in, opacity 0.3s ease-in;
+        }
+
+        .collapsible-content-wrapper {
+            padding-top: 10px;
+        }
+
+        /* 專案收合的特殊樣式 */
+        .project-wrapper .collapsible-toggle-top {
+            background-color: #f0f4ff;
+            border: 2px solid #764ba2;
+            font-weight: 600;
+        }
+
+        .project-wrapper .collapsible-toggle-bottom {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 1px solid #764ba2;
+            color: #764ba2;
+            font-weight: 500;
+        }
+
+        .project-wrapper .collapsible-toggle-bottom:hover {
+            background: linear-gradient(135deg, #667eea25 0%, #764ba225 100%);
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 600px) {
+            .collapsible-toggle-bottom {
+                font-size: 0.9em;
+                padding: 8px 12px;
+            }
+        }
+
+        /* 列印時隱藏底部按鈕 */
+        @media print {
+            .collapsible-toggle-bottom {
+                display: none !important;
+            }
+        }
+
+        /* 巢狀的底部按鈕樣式（內層） */
+        .nested-bottom-toggle {
+            background-color: #fff3e0;
+            border-color: #ff9800;
+            color: #e65100;
+            font-size: 0.9em;
+            margin-top: 15px;
+        }
+
+        .nested-bottom-toggle:hover {
+            background-color: #ffe0b2;
+        }
+
+        /* 外層專案的底部按鈕 */
+        .outer-bottom-toggle {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 2px solid #764ba2;
+            color: #764ba2;
+            font-weight: 600;
+            margin-top: 30px;
+        }
+
+        .outer-bottom-toggle:hover {
+            background: linear-gradient(135deg, #667eea25 0%, #764ba225 100%);
+        }
+
+        /* 巢狀的切換按鈕樣式 */
+        .nested-toggle {
+            font-size: 0.95em;
+            background-color: #f8f9fa;
+            border-color: #adb5bd;
+        }
+
+        /* 視覺層級區分（可選） */
+        .collapsible-container[data-nested="true"] {
+            background-color: rgba(248, 249, 250, 0.5);
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
         }
     </style>
 </head>
@@ -627,7 +712,6 @@
                     <h3>國立海洋大學 — 資訊工程學系</h3>
                     <p class="date">2020 年 9 月 - 2024 年 6 月</p>
                     <ul>
-                        <li>主修：演算法設計、人工智慧、影像處理、機器學習</li>
                         <li class="highlight">畢業專題獲選「佳作」殊榮</li>
                     </ul>
 
@@ -739,7 +823,7 @@
                             <span style="font-size: 1.3em;">🔗</span> 跨領域整合能力
                         </h3>
                         <p style="color: #555; line-height: 1.6;">
-                            能有效結合影像處理、圖論演算法與前端視覺化技術，在畢業專題中成功整合 SURF 特徵匹配與 MST 演算法，解決實際問題。
+                            能有效結合多領域知識與技術，在畢業專題中成功整合機器學習, SURF 特徵匹配與 MST 演算法，解決實際問題。
                         </p>
                     </div>
 
@@ -1260,35 +1344,23 @@
     <script src="function/collapsible.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // 技術架構圖
-            createCollapsible('tech-architecture', '📊 查看技術架構圖', false);
 
-            // 圖表專案demo影片
-            createCollapsible('demo-video', '🎬 查看展示影片', false);
-
-            // 專題海報
-            createCollapsible('project-poster', '🖼️ 查看專題海報', false);
-
-            // Radix Sort 架構圖
-            createCollapsible('radix-sort-architecture', '📊 查看演算法架構圖', false);
-
-
-            // 新增：三個專案的收合功能
-            //createCollapsible('project-image-stitching', '📁 不規則影像拼接系統開發', false);
-            //createCollapsible('project-kline-chart', '📁 金融數據K線圖視覺化系統', false);
-            //createCollapsible('project-radix-sort', '📁 高效能浮點數 Radix Sort 演算法實作與優化', false);
+            createCollapsible('project-poster', '🖼️ 專題海報', false, true);
+            createCollapsible('tech-architecture', '📊 技術架構圖', false, true);
+            createCollapsible('demo-video', '🎬 展示影片', false, false);
+            createCollapsible('radix-sort-architecture', '📊 演算法架構圖', false, true);
 
             const stitch = `<img src="icons/stitch.png" class="skill-icon">`;
-            createCollapsibleWithIcon('project-image-stitching', stitch, '不規則影像拼接系統開發', false);
+            createCollapsibleWithIcon('project-image-stitching', stitch, '不規則影像拼接系統開發', false, true);
 
             const kline = `<img src="icons/kline.svg" class="skill-icon">`;
-            createCollapsibleWithIcon('project-kline-chart', kline, '金融數據K線圖視覺化系統', false);
-
+            createCollapsibleWithIcon('project-kline-chart', kline, '金融數據K線圖視覺化系統', false, true);
 
             const sort = `<img src="icons/sort.svg" class="skill-icon">`;
-            createCollapsibleWithIcon('project-radix-sort', sort, '高效能浮點數 Radix Sort 演算法實作與優化', false);
+            createCollapsibleWithIcon('project-radix-sort', sort, '高效能浮點數 Radix Sort 演算法實作與優化', false, true);
 
         });
+
     </script>
 
 </body>
